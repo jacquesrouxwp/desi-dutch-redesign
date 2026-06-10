@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dutch Gym — The New Era of Fitness | Utrecht 24/7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;1,400&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111111;
+  --card:#161616;
+  --line:rgba(255,255,255,.08);
+  --txt:#f2f2f0;
+  --muted:#9a9a94;
+  --volt:#d8ff3e;
+  --volt-dim:rgba(216,255,62,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Archivo',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--volt);color:#000}
+h1,h2,h3,.display{font-family:'Archivo Black',sans-serif;text-transform:uppercase;line-height:.95;letter-spacing:-.01em}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 6vw}
+
+/* ---------- preloader ---------- */
+#loader{position:fixed;inset:0;background:#000;z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s}
+#loader.done{opacity:0;visibility:hidden}
+#loader span{font-family:'Archivo Black';font-size:clamp(28px,5vw,64px);text-transform:uppercase;color:var(--volt);animation:pulse 1s ease infinite alternate}
+@keyframes pulse{from{opacity:.3;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
+
+/* ---------- progress bar ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--volt);width:0;z-index:120}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:110;display:flex;align-items:center;justify-content:space-between;padding:18px 4vw;transition:background .4s,backdrop-filter .4s,padding .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(10,10,10,.78);backdrop-filter:blur(16px);border-bottom-color:var(--line);padding:12px 4vw}
+.logo{font-family:'Archivo Black';font-size:20px;text-transform:uppercase;letter-spacing:.02em;display:inline-flex;align-items:center}
+.logo em{color:var(--volt);font-style:normal}
+.logo img{height:42px;width:auto}
+nav.scrolled .logo img{height:36px;transition:height .4s}
+footer .logo img{height:52px}
+.nav-links{display:flex;gap:34px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nav-links a{position:relative;transition:color .25s}
+.nav-links a:hover{color:var(--txt)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--volt);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--volt);color:#000;font-family:'Archivo Black';text-transform:uppercase;font-size:13px;letter-spacing:.06em;padding:14px 26px;border-radius:999px;transition:transform .25s,box-shadow .25s;will-change:transform}
+.btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 40px rgba(216,255,62,.35)}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid rgba(255,255,255,.25)}
+.btn.ghost:hover{border-color:var(--volt);color:var(--volt);box-shadow:none}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+header{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(35%) contrast(1.08) brightness(.55);transform:scale(1.12);animation:heroZoom 8s ease-out forwards}
+@keyframes heroZoom{to{transform:scale(1.02)}}
+header::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,10,10,.35) 0%,rgba(10,10,10,.15) 45%,var(--bg) 96%)}
+.hero-inner{padding:0 4vw 0}
+.hero-kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--volt);margin-bottom:22px;opacity:0;animation:rise .8s .3s forwards}
+.hero-kicker::before{content:"";width:34px;height:1px;background:var(--volt)}
+.hero-title{font-size:clamp(48px,9.5vw,150px);text-transform:uppercase}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line span{display:block;transform:translateY(110%);animation:lineUp 1s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-title .line:nth-child(2) span{animation-delay:.12s}
+.hero-title .line:nth-child(3) span{animation-delay:.24s;color:transparent;-webkit-text-stroke:2px var(--volt)}
+@keyframes lineUp{to{transform:translateY(0)}}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;padding:36px 4vw 90px;flex-wrap:wrap}
+.hero-sub{max-width:420px;color:var(--muted);font-size:16px;line-height:1.6;opacity:0;animation:rise .8s .6s forwards}
+.hero-cta{display:flex;gap:14px;opacity:0;animation:rise .8s .75s forwards}
+.scroll-hint{position:absolute;right:4vw;bottom:24px;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;display:flex;align-items:center;gap:10px}
+.scroll-hint::after{content:"";width:1px;height:48px;background:linear-gradient(var(--volt),transparent);animation:drip 1.6s ease infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- marquee ---------- */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--bg)}
+.marquee-track{display:flex;gap:48px;width:max-content;animation:scrollX 26s linear infinite}
+.marquee span{font-family:'Archivo Black';font-size:clamp(16px,2.2vw,26px);text-transform:uppercase;white-space:nowrap;color:var(--txt)}
+.marquee span.o{color:transparent;-webkit-text-stroke:1px var(--muted)}
+@keyframes scrollX{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{padding:110px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:64px;flex-wrap:wrap}
+.kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--volt);display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+.kicker::before{content:"";width:28px;height:1px;background:var(--volt)}
+.sec-title{font-size:clamp(34px,5vw,68px)}
+.sec-title .stroke{color:transparent;-webkit-text-stroke:1.5px var(--txt)}
+.lead{color:var(--muted);font-size:17px;line-height:1.7;max-width:520px}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--bg2)}
+.stat{padding:38px 28px;border-right:1px solid var(--line);transition:background .3s}
+.stat:last-child{border-right:0}
+.stat:hover{background:var(--volt-dim)}
+.stat b{font-family:'Archivo Black';font-size:clamp(34px,4vw,54px);display:block;color:var(--volt)}
+.stat small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2n){border-right:0}.stat{border-bottom:1px solid var(--line)}.stat:nth-child(3),.stat:nth-child(4){border-bottom:0}}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.about-img{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:4/4.6}
+.about-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.05);transition:transform .8s ease}
+.about-img:hover img{transform:scale(1.05)}
+.about-img .tag{position:absolute;left:18px;bottom:18px;background:rgba(10,10,10,.7);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.about-img .tag em{color:var(--volt);font-style:normal}
+.checks{margin-top:34px;display:grid;gap:14px}
+.checks li{list-style:none;display:flex;gap:14px;align-items:flex-start;color:#cfcfc9;font-size:15.5px;line-height:1.5}
+.checks li::before{content:"";flex:0 0 auto;width:20px;height:20px;margin-top:1px;border-radius:50%;background:var(--volt-dim);border:1px solid var(--volt);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d8ff3e' stroke-width='3'%3E%3Cpath d='M5 13l4 4 10-10'/%3E%3C/svg%3E");background-size:11px;background-position:center;background-repeat:no-repeat}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+
+/* ---------- pillars ---------- */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pillar{position:relative;border-radius:22px;overflow:hidden;min-height:480px;display:flex;flex-direction:column;justify-content:flex-end;padding:30px;border:1px solid var(--line);background:var(--card)}
+.pillar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(30%) brightness(.5);transition:transform .8s ease,filter .8s ease;z-index:0}
+.pillar:hover img{transform:scale(1.07);filter:grayscale(0%) brightness(.62)}
+.pillar>*{position:relative;z-index:1}
+.pillar .num{position:absolute;top:24px;left:26px;font-family:'Archivo Black';font-size:15px;color:var(--volt)}
+.pillar h3{font-size:26px;margin-bottom:12px}
+.pillar p{color:#d6d6d0;font-size:14.5px;line-height:1.6;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s ease,opacity .6s ease,margin .6s}
+.pillar:hover p{max-height:200px;opacity:1;margin-bottom:14px}
+.pillar .more{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--volt);display:inline-flex;gap:8px;align-items:center}
+.pillar .more::after{content:"→";transition:transform .3s}
+.pillar:hover .more::after{transform:translateX(6px)}
+@media(max-width:900px){.pillars{grid-template-columns:1fr}.pillar{min-height:380px}.pillar p{max-height:none;opacity:1;margin-bottom:14px}}
+
+/* ---------- classes ticker grid ---------- */
+.classes{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.class-row{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:28px;padding:30px 10px;border-bottom:1px solid var(--line);position:relative;cursor:pointer;transition:padding .35s}
+.class-row:hover{padding-left:28px}
+.class-row .idx{font-family:'Archivo Black';color:var(--muted);font-size:14px}
+.class-row h3{font-size:clamp(24px,3.6vw,44px);transition:color .3s;-webkit-text-stroke:0 transparent}
+.class-row:hover h3{color:var(--volt)}
+.class-row .desc{color:var(--muted);font-size:14px;max-width:340px;text-align:right}
+.class-row::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--volt);transition:width .45s ease}
+.class-row:hover::after{width:100%}
+@media(max-width:760px){.class-row{grid-template-columns:48px 1fr}.class-row .desc{display:none}}
+
+/* ---------- wellness ---------- */
+.well{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.well-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center}
+.well-img{border-radius:24px;overflow:hidden;aspect-ratio:4/4.2}
+.well-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.well-img:hover img{transform:scale(1.05)}
+.amenities{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:34px}
+.amenity{border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14px;color:#d2d2cc;display:flex;align-items:center;gap:12px;transition:border-color .3s,background .3s}
+.amenity:hover{border-color:var(--volt);background:var(--volt-dim)}
+.amenity::before{content:"✦";color:var(--volt);font-size:12px}
+@media(max-width:900px){.well-grid{grid-template-columns:1fr}.amenities{grid-template-columns:1fr}}
+
+/* ---------- pricing/deal ---------- */
+.deal{position:relative;border-radius:28px;overflow:hidden;padding:clamp(40px,7vw,90px);text-align:center;background:radial-gradient(120% 160% at 50% 0%,rgba(216,255,62,.16),transparent 55%),var(--card);border:1px solid var(--line)}
+.deal .big{font-size:clamp(70px,14vw,200px);color:var(--volt);line-height:.9}
+.deal h2{font-size:clamp(26px,3.6vw,46px);margin:10px 0 18px}
+.deal p{color:var(--muted);max-width:560px;margin:0 auto 34px;line-height:1.7}
+.deal .perks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:38px}
+.deal .perk{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:10px 18px;color:#d8d8d2}
+
+/* ---------- locations ---------- */
+.locs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.loc{border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--card);transition:transform .4s,border-color .4s}
+.loc:hover{transform:translateY(-8px);border-color:rgba(216,255,62,.5)}
+.loc .ph{aspect-ratio:16/10;overflow:hidden}
+.loc .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(25%);transition:transform .7s,filter .7s}
+.loc:hover .ph img{transform:scale(1.06);filter:grayscale(0)}
+.loc .body{padding:24px}
+.loc h3{font-size:20px;margin-bottom:8px}
+.loc small{color:var(--muted);font-size:13px;letter-spacing:.06em}
+.loc .pill{display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--volt);border:1px solid rgba(216,255,62,.4);border-radius:999px;padding:7px 14px}
+@media(max-width:900px){.locs{grid-template-columns:1fr}}
+
+/* ---------- reviews ---------- */
+.reviews{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.review{border:1px solid var(--line);border-radius:22px;padding:34px;background:var(--bg2);position:relative}
+.review::before{content:"“";position:absolute;top:14px;right:26px;font-family:'Archivo Black';font-size:90px;color:var(--volt-dim)}
+.review p{color:#d6d6d0;font-size:16px;line-height:1.7;margin-bottom:22px}
+.review .who{display:flex;align-items:center;gap:14px}
+.review .av{width:44px;height:44px;border-radius:50%;background:var(--volt);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black';font-size:16px}
+.review .who small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.stars{color:var(--volt);letter-spacing:3px;font-size:13px;margin-bottom:14px}
+@media(max-width:800px){.reviews{grid-template-columns:1fr}}
+
+/* ---------- final cta ---------- */
+.final{position:relative;text-align:center;padding:160px 6vw;overflow:hidden}
+.final .bgword{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black';font-size:clamp(80px,16vw,260px);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.07);text-transform:uppercase;white-space:nowrap;pointer-events:none}
+.final h2{font-size:clamp(36px,6vw,84px);margin-bottom:26px}
+.final h2 em{font-style:normal;color:var(--volt)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:60px 4vw 40px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+footer .cols{display:flex;gap:60px;flex-wrap:wrap}
+footer h4{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt);margin-bottom:14px;font-family:'Archivo Black'}
+footer ul{list-style:none;display:grid;gap:9px}
+footer a:hover{color:var(--volt)}
+.foot-bottom{width:100%;margin-top:46px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px}
+</style>
+</head>
+<body>
+
+<div id="loader"><span>Dutch&nbsp;<em style="color:var(--volt)">Gym</em></span></div>
+<div id="progress"></div>
+
+<nav id="nav">
+  <a class="logo" href="#top"><img src="https://dutchgym.nl/wp-content/uploads/2022/04/DG_footer_logo-1.png-1.webp" alt="Dutch Gym" onerror="this.remove();this.parentElement.innerHTML='DUTCH<em>GYM</em>'"></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#train">Training</a>
+    <a href="#classes">Classes</a>
+    <a href="#wellness">Recovery</a>
+    <a href="#clubs">Clubs</a>
+  </div>
+  <a class="btn" href="#join">Join now</a>
+</nav>
+
+<header id="top">
+  <div class="hero-bg"><img src="https://dutchgym.nl/wp-content/uploads/2025/06/squat-@-Dutch-Gym-Utrecht-Oost.webp" alt="Dutch Gym Utrecht"></div>
+  <div class="hero-inner">
+    <div class="hero-kicker">Utrecht · Open 24/7 · 3 Clubs</div>
+    <h1 class="hero-title">
+      <span class="line"><span>The new era</span></span>
+      <span class="line"><span>of fitness</span></span>
+      <span class="line"><span>starts here</span></span>
+    </h1>
+  </div>
+  <div class="hero-bottom">
+    <p class="hero-sub">A next-level 24/7 fitness & lifestyle concept, unmatched in the Netherlands. Training, nutrition, coaching and full wellness & recovery — all under one roof.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#join">Claim 44% off</a>
+      <a class="btn ghost" href="#clubs">Book a club tour</a>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Open 24/7</span><span class="o">Hyrox</span><span>Strength</span><span class="o">Sauna & Recovery</span><span>Small Group Training</span><span class="o">Functional Zone</span><span>Personal Training</span><span class="o">Cold Bath</span>
+    <span>Open 24/7</span><span class="o">Hyrox</span><span>Strength</span><span class="o">Sauna & Recovery</span><span>Small Group Training</span><span class="o">Functional Zone</span><span>Personal Training</span><span class="o">Cold Bath</span>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="stats rv">
+      <div class="stat"><b data-count="3">0</b><small>Clubs in Utrecht</small></div>
+      <div class="stat"><b><span data-count="24">0</span>/7</b><small>Always open</small></div>
+      <div class="stat"><b data-count="40">0</b><small>Classes per week</small></div>
+      <div class="stat"><b><span data-count="44">0</span>%</b><small>Opening discount</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="rv">
+      <div class="kicker">More than a gym</div>
+      <h2 class="sec-title">Train. Recover.<br><span class="stroke">Live the fit life.</span></h2>
+      <p class="lead" style="margin-top:24px">Dutch Gym is a complete fitness & lifestyle concept: hybrid training, nutrition guidance, coaching and 24/7 wellness facilities — included with every premium membership.</p>
+      <ul class="checks">
+        <li>Hybrid training: strength, conditioning and endurance combined — including S&C and Hyrox</li>
+        <li>Personal guidance every morning and evening, seven days a week</li>
+        <li>Custom training plans, nutrition & lifestyle coaching via the DG app</li>
+        <li>Stylish lounge with free coffee, tea and sports drinks</li>
+      </ul>
+      <div style="margin-top:36px"><a class="btn" href="#join">Join the club</a></div>
+    </div>
+    <div class="about-img rv d1">
+      <img src="https://dutchgym.nl/wp-content/uploads/2025/06/Dutch-Gym-Fitness-Utrecht-1.webp" alt="Inside Dutch Gym">
+      <div class="tag"><em>●</em>&nbsp; City's finest hybrid gym</div>
+    </div>
+  </div>
+</section>
+
+<section id="train">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <div class="kicker">This is what you get</div>
+        <h2 class="sec-title">Everything.<br><span class="stroke">Included.</span></h2>
+      </div>
+      <p class="lead rv d1">Three pillars, one membership. No upsells, no surprises — premium means everything is in.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar rv">
+        <img src="https://dutchgym.nl/wp-content/uploads/2024/12/more-than-a-gym-1.webp" alt="Next level fitness">
+        <span class="num">01</span>
+        <h3>Next Level Fitness</h3>
+        <p>24/7 access. State-of-the-art cardio, complete plate-loaded strength line, racks & free weights, and Utrecht's first 24/7 Functional Training Zone.</p>
+        <span class="more">Explore</span>
+      </article>
+      <article class="pillar rv d1">
+        <img src="https://dutchgym.nl/wp-content/uploads/2024/12/wellness-recovery-bij-Dutch-Gym.webp" alt="Wellness and recovery">
+        <span class="num">02</span>
+        <h3>Wellness & Recovery</h3>
+        <p>Sauna & infrared, hydromassage, cryolounge, cold bath and red light therapy — open 24/7 for recovery on your schedule.</p>
+        <span class="more">Explore</span>
+      </article>
+      <article class="pillar rv d2">
+        <img src="https://dutchgym.nl/wp-content/uploads/2024/12/groepslessen-bij-Dutch-Gym.webp" alt="DG classes">
+        <span class="num">03</span>
+        <h3>DG Classes</h3>
+        <p>The most complete class line-up in Utrecht: from Yoga and Zumba to boxing, bootcamp and exclusive small group training.</p>
+        <span class="more">Explore</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="classes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <div class="kicker">Choose your challenge</div>
+        <h2 class="sec-title">We have the workout<br><span class="stroke">you're looking for</span></h2>
+      </div>
+    </div>
+    <div class="classes rv">
+      <div class="class-row"><span class="idx">01</span><h3>Hyrox</h3><span class="desc">The intense fitness race experience — running, sleds, kettlebells and more.</span></div>
+      <div class="class-row"><span class="idx">02</span><h3>Strength & Conditioning</h3><span class="desc">Movement quality first. Performance always.</span></div>
+      <div class="class-row"><span class="idx">03</span><h3>Powerbuilding</h3><span class="desc">Powerlifting meets bodybuilding in small groups.</span></div>
+      <div class="class-row"><span class="idx">04</span><h3>Metcon</h3><span class="desc">Metabolic conditioning that pushes your engine to the next level.</span></div>
+      <div class="class-row"><span class="idx">05</span><h3>Boxing</h3><span class="desc">Cardio, strength and confidence — on the heavy bag.</span></div>
+      <div class="class-row"><span class="idx">06</span><h3>Bootcamp</h3><span class="desc">Indoor & outdoor. Rain or shine, always a bootcamp.</span></div>
+      <div class="class-row"><span class="idx">07</span><h3>Spinning</h3><span class="desc">The ultimate indoor cycling cardio workout.</span></div>
+      <div class="class-row"><span class="idx">08</span><h3>Yoga & Body/Mind</h3><span class="desc">Yoga, Bodybalance and Pilates for every level.</span></div>
+      <div class="class-row"><span class="idx">09</span><h3>Personal Training</h3><span class="desc">One-on-one with our expert trainers.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="wellness" class="well">
+  <div class="wrap well-grid">
+    <div class="well-img rv">
+      <img src="https://dutchgym.nl/wp-content/uploads/2024/12/sportschool-Utrecht.webp" alt="Wellness at Dutch Gym">
+    </div>
+    <div class="rv d1">
+      <div class="kicker">24/7 Wellness & Recovery</div>
+      <h2 class="sec-title">Recovery is part<br><span class="stroke">of the workout</span></h2>
+      <p class="lead" style="margin-top:24px">A unique combination of relaxation and regeneration — available around the clock, included in every premium membership.</p>
+      <div class="amenities">
+        <div class="amenity">Sauna & infrared sauna</div>
+        <div class="amenity">Hydromassage</div>
+        <div class="amenity">Cryolounge</div>
+        <div class="amenity">Cold bath</div>
+        <div class="amenity">Red light therapy</div>
+        <div class="amenity">Relax space</div>
+        <div class="amenity">In-house physiotherapy</div>
+        <div class="amenity">Free first intake session</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <div class="deal rv">
+      <div class="kicker" style="justify-content:center;display:flex">Vredenburg opening deal</div>
+      <div class="big display">44%</div>
+      <h2>off your membership</h2>
+      <p>To celebrate the opening of Dutch Gym XL Vredenburg in the heart of Utrecht, we're giving the biggest discount ever. Or try "Sport nu Gratis" — the more you train, the less you pay. Down to zero.</p>
+      <div class="perks">
+        <span class="perk">No sign-up fee</span>
+        <span class="perk">Free takeover of your current contract</span>
+        <span class="perk">Bring a buddy for free</span>
+      </div>
+      <a class="btn" href="#">Claim the deal</a>
+    </div>
+  </div>
+</section>
+
+<section id="clubs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <div class="kicker">3 clubs in Utrecht</div>
+        <h2 class="sec-title">Find your<br><span class="stroke">home gym</span></h2>
+      </div>
+      <p class="lead rv d1">You're always welcome for a live club tour at any of our locations.</p>
+    </div>
+    <div class="locs">
+      <article class="loc rv">
+        <div class="ph"><img src="https://dutchgym.nl/wp-content/uploads/2026/05/club-tour-west-thumb-1.webp" alt="Dutch Gym Utrecht West"></div>
+        <div class="body"><h3>Utrecht West</h3><small>Groeneweg 46 · The original</small><br><span class="pill">Book a tour</span></div>
+      </article>
+      <article class="loc rv d1">
+        <div class="ph"><img src="https://dutchgym.nl/wp-content/uploads/2026/05/DG-Oost-thumb-1.webp" alt="Dutch Gym Utrecht Oost"></div>
+        <div class="body"><h3>Utrecht Oost</h3><small>Burg. Fockema Andreaeplein 443</small><br><span class="pill">Book a tour</span></div>
+      </article>
+      <article class="loc rv d2">
+        <div class="ph"><img src="https://dutchgym.nl/wp-content/uploads/2026/05/Vredenburg-thumb-copy.webp" alt="Dutch Gym XL Vredenburg"></div>
+        <div class="body"><h3>XL Vredenburg <span style="color:var(--volt);font-size:11px;vertical-align:top">NEW</span></h3><small>City centre · Iconic building</small><br><span class="pill">Book a tour</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <div class="kicker">What our members say</div>
+        <h2 class="sec-title">Real people.<br><span class="stroke">Real results.</span></h2>
+      </div>
+    </div>
+    <div class="reviews">
+      <article class="review rv">
+        <div class="stars">★★★★★</div>
+        <p>Great gym! Very friendly staff and fun classes. Not one of those massive halls packed with people — different floors make training really comfortable.</p>
+        <div class="who"><div class="av">Q</div><div><b>Quinten Isselman</b><small>Google Review</small></div></div>
+      </article>
+      <article class="review rv d1">
+        <div class="stars">★★★★★</div>
+        <p>I was a member of the previous gym here — it's now miles better. Great equipment, great atmosphere, and the recovery area is a game changer.</p>
+        <div class="who"><div class="av">H</div><div><b>H. Zuidhoek</b><small>Google Review</small></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="final">
+  <div class="bgword">DUTCH GYM</div>
+  <div class="rv">
+    <h2>Come workout<br>@ <em>Dutch Gym</em></h2>
+    <a class="btn" href="#join" style="font-size:15px;padding:18px 38px">Become a DG member</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <a class="logo" href="#top"><img src="https://dutchgym.nl/wp-content/uploads/2022/04/DG_footer_logo-1.png-1.webp" alt="Dutch Gym" onerror="this.remove();this.parentElement.innerHTML='DUTCH<em>GYM</em>'"></a>
+    <p style="margin-top:14px;max-width:260px;line-height:1.6">Groeneweg 46, 3531 VG Utrecht<br>Open 24/7 · 3 clubs</p>
+  </div>
+  <div class="cols">
+    <div><h4>Clubs</h4><ul><li><a href="#clubs">Utrecht West</a></li><li><a href="#clubs">Utrecht Oost</a></li><li><a href="#clubs">XL Vredenburg</a></li></ul></div>
+    <div><h4>Training</h4><ul><li><a href="#classes">Group classes</a></li><li><a href="#classes">Small group</a></li><li><a href="#classes">Personal training</a></li></ul></div>
+    <div><h4>More</h4><ul><li><a href="#wellness">Wellness & Recovery</a></li><li><a href="#join">Memberships</a></li><li><a href="#">Contact</a></li></ul></div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Dutch Gym — concept redesign</span>
+    <span>Privacy · Terms</span>
+  </div>
+</footer>
+
+<script>
+// preloader
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('done'),500));
+setTimeout(()=>document.getElementById('loader').classList.add('done'),2500); // failsafe
+
+// nav + progress
+const nav=document.getElementById('nav'),prog=document.getElementById('progress');
+addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>40);
+  const h=document.documentElement;
+  prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// animated counters
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;cio.unobserve(e.target);
+  const el=e.target,end=+el.dataset.count,t0=performance.now(),dur=1400;
+  (function tick(t){const p=Math.min((t-t0)/dur,1);el.textContent=Math.round(end*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick)})(t0);
+}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+// subtle hero parallax
+const heroImg=document.querySelector('.hero-bg img');
+addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight)heroImg.style.transform=`scale(1.02) translateY(${y*.18}px)`},{passive:true});
+</script>
+</body>
+</html>
