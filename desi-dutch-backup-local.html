@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Desi & Dutch — Pakistani soul, Dutch comfort | Utrecht</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,15 +33,15 @@ a{color:inherit;text-decoration:none}
 #intro.reveal{background:transparent;backdrop-filter:blur(0px) saturate(1);-webkit-backdrop-filter:blur(0px) saturate(1);pointer-events:none}
 #intro.reveal .skip{opacity:0}
 #intro.done{opacity:0;visibility:hidden}
-#introLogo{grid-area:1/1;justify-self:center;align-self:center;width:min(300px,52vw);opacity:0;transform:scale(.82);transition:opacity .8s ease,transform 1.05s cubic-bezier(.65,.05,.25,1);will-change:transform;filter:drop-shadow(0 16px 44px rgba(31,20,16,.5))}
-#introLogo.show{opacity:1;transform:scale(1)}
+#intro video{grid-area:1/1;width:min(440px,74vw);height:auto;transition:opacity .4s;filter:drop-shadow(0 18px 50px rgba(31,20,16,.45))}
+#introLogo{grid-area:1/1;justify-self:center;align-self:center;width:min(280px,48vw);opacity:0;transition:opacity .4s,transform 1s cubic-bezier(.65,.05,.25,1);will-change:transform;filter:drop-shadow(0 10px 30px rgba(31,20,16,.5))}
 #intro .skip{color:rgba(250,244,234,.75)}
 #intro .skip:hover{color:#f5c98f}
 #intro .skip{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b0a294;cursor:pointer;border:none;background:none;font-family:'Inter'}
 #intro .skip:hover{color:var(--saffron-deep)}
 
 /* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:calc(16px + env(safe-area-inset-top,0px)) 4vw 16px;transition:.4s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 4vw;transition:.4s}
 nav.scrolled{background:rgba(250,244,234,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
 nav .logo img{height:56px;transition:.3s;filter:drop-shadow(0 2px 10px rgba(255,255,255,.45)) drop-shadow(0 1px 3px rgba(31,20,16,.3))}
 nav.scrolled .logo img{height:44px;filter:none}
@@ -80,7 +80,7 @@ body.menu-open .burger span:nth-child(2){opacity:0}
 body.menu-open .burger span:nth-child(3){top:21px;transform:rotate(-45deg)}
 
 /* mobile menu */
-#mobileMenu{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 10px) 9vw calc(env(safe-area-inset-bottom,0px) + 10px);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
+#mobileMenu{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:0 9vw;opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
 body.menu-open #mobileMenu{opacity:1;visibility:visible}
 #mobileMenu a{font-family:'Fraunces';font-size:clamp(32px,9vw,44px);color:var(--cream);padding:12px 0;border-bottom:1px solid var(--line-l);opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s,color .3s}
 #mobileMenu a:active{color:var(--saffron)}
@@ -104,7 +104,7 @@ body.menu-open{overflow:hidden}
   nav>.btn{display:none}
   .lang{margin-left:auto;margin-right:8px}
   #stickyCta{display:block}
-  nav{padding:calc(10px + env(safe-area-inset-top,0px)) 5vw 10px}
+  nav{padding:12px 5vw}
   nav .logo img{height:46px}
   section{padding:64px 0}
   .wrap{padding:0 7vw}
@@ -196,18 +196,11 @@ section{padding:110px 0}
 .dish .price{font-family:'Fraunces';font-size:19px;color:#f5c98f;white-space:nowrap}
 .dish p{font-size:13.5px;line-height:1.6;color:rgba(250,244,234,.6)}
 /* menu category tabs */
-.mtabs-wrap{position:relative;margin-bottom:34px}
-.mtabs{display:flex;gap:8px;flex-wrap:wrap}
-.mtab{flex:0 0 auto;border:1px solid var(--line-l);background:none;border-radius:999px;padding:11px 18px;cursor:pointer;font-family:'Inter';font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,244,234,.65);transition:.3s;white-space:nowrap}
+.mtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+.mtab{border:1px solid var(--line-l);background:none;border-radius:999px;padding:10px 18px;cursor:pointer;font-family:'Inter';font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,244,234,.65);transition:.3s;white-space:nowrap}
 .mtab:hover{color:var(--cream);border-color:rgba(250,244,234,.4)}
-.mtab.on{background:var(--saffron);border-color:var(--saffron);color:#fff;box-shadow:0 6px 20px rgba(232,132,44,.35)}
-@media(max-width:760px){
-  .mtabs{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;margin:0 -7vw;padding:4px 7vw 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .mtabs::-webkit-scrollbar{display:none}
-  .mtab{scroll-snap-align:center;padding:13px 20px;font-size:13px}
-  .mtabs-wrap::after{content:'';position:absolute;top:0;right:-7vw;width:52px;height:calc(100% - 8px);background:linear-gradient(90deg,transparent,var(--ink));pointer-events:none}
-  .mtabs-wrap::before{content:'';position:absolute;top:0;left:-7vw;width:20px;height:calc(100% - 8px);background:linear-gradient(270deg,transparent,var(--ink));pointer-events:none;z-index:1}
-}
+.mtab.on{background:var(--saffron);border-color:var(--saffron);color:#fff}
+@media(max-width:760px){.mtabs{flex-wrap:nowrap;overflow-x:auto;margin-left:-7vw;margin-right:-7vw;padding:0 7vw 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mtabs::-webkit-scrollbar{display:none}}
 .menu-list{transition:opacity .35s,transform .35s}
 .menu-list.fade{opacity:0;transform:translateY(12px)}
 .mnote{font-size:12.5px;color:rgba(250,244,234,.45);margin:-34px 0 50px}
@@ -299,7 +292,9 @@ footer a:hover{color:var(--saffron)}
 <body>
 
 <div id="intro">
+  <video id="introVid" src="assets/logo-motion-alpha.webm" autoplay muted playsinline></video>
   <img id="introLogo" src="assets/logo.png" alt="">
+  <button class="skip" onclick="handoff()">Skip intro</button>
 </div>
 
 <nav id="nav">
@@ -403,8 +398,8 @@ footer a:hover{color:var(--saffron)}
         </div>
       </article>
     </div>
-    <div class="mtabs-wrap"><div class="mtabs" id="mtabs"></div></div>
-    <div class="menu-list" id="menuItems"></div>
+    <div class="mtabs rv" id="mtabs"></div>
+    <div class="menu-list rv" id="menuItems"></div>
     <p class="mnote">* Vega(n) optie beschikbaar · Alles 100% halal</p>
     <div class="badges rv">
       <span class="badge hl">100% Halal</span>
@@ -528,26 +523,33 @@ footer a:hover{color:var(--saffron)}
 </footer>
 
 <script>
-// intro: logo appears center, then flies into the nav corner
+// intro logo motion → flies into nav corner
 const intro=document.getElementById('intro');
+const iv=document.getElementById('introVid');
 const il=document.getElementById('introLogo');
 const navLogo=document.querySelector('nav .logo img');
 navLogo.style.opacity=0; // hidden until handoff
 let handed=false;
+// Safari can't play VP9 alpha — skip the spin, just show the site
+if(!iv.canPlayType('video/webm; codecs="vp9"')){iv.style.display='none';setTimeout(()=>handoff(),50)}
 function handoff(){
   if(handed)return;handed=true;
-  // blur lifts, logo flies to the nav corner
-  intro.classList.add('reveal');
-  const s=il.getBoundingClientRect(),e=navLogo.getBoundingClientRect();
-  const dx=(e.left+e.width/2)-(s.left+s.width/2);
-  const dy=(e.top+e.height/2)-(s.top+s.height/2);
-  il.style.transform=`translate(${dx}px,${dy}px) scale(${e.height/s.height})`;
-  setTimeout(()=>{navLogo.style.opacity=1;intro.classList.add('done');setTimeout(()=>intro.remove(),900)},1050);
+  // 1. crossfade video → transparent png
+  il.style.opacity=1;iv.style.opacity=0;
+  setTimeout(()=>{
+    // 2. blur lifts, logo flies to the nav corner
+    intro.classList.add('reveal');
+    const s=il.getBoundingClientRect(),e=navLogo.getBoundingClientRect();
+    const dx=(e.left+e.width/2)-(s.left+s.width/2);
+    const dy=(e.top+e.height/2)-(s.top+s.height/2);
+    il.style.transform=`translate(${dx}px,${dy}px) scale(${e.height/s.height})`;
+    // 3. swap to the real nav logo
+    setTimeout(()=>{navLogo.style.opacity=1;intro.classList.add('done');setTimeout(()=>intro.remove(),900)},1000);
+  },420);
 }
-requestAnimationFrame(()=>requestAnimationFrame(()=>il.classList.add('show')));
-il.addEventListener('error',handoff);
-setTimeout(handoff,2100);
-intro.addEventListener('click',handoff); // tap to skip
+iv.addEventListener('ended',handoff);
+iv.addEventListener('error',handoff);
+setTimeout(handoff,6500); // failsafe
 
 const nav=document.getElementById('nav');
 const sticky=document.getElementById('stickyCta');
@@ -734,95 +736,4 @@ const MENU=[
  {id:'sn',label:{en:'Desi Snacks',nl:'Desi Snacks',el:'Desi Σνακ',ur:'دیسی سنیکس'},items:[
   ['Vegetarische Samosa (mild)','Knapperig, gevuld met gekruide aardappel en doperwten','3.95'],
   ['Pakora (mild)','Knapperige groentebeignets in kikkererwtenbeslag','6.95'],
-  ['Loempia','Goudbruin, gevuld met verse groenten en sojavlees','3.95'],
-  ['Chicken Tandoori wings','Zacht gemarineerd, langzaam geroosterd, milde pittige saus','6.95']]},
- {id:'ds',label:{en:'Dessert',nl:'Dessert',el:'Επιδόρπια',ur:'میٹھا'},items:[
-  ['Kheer','Pakistaanse rijstpudding met kardemom en pistache','6.95'],
-  ['Zarda rice','Zoete saffraanrijst met kardemom, rozijnen en geroosterde noten','8.95'],
-  ['Worteltaart','','4.50'],['Appelkruimeltaart','','4.50'],['Bananenbrood','','4.50'],['Vegan chocolate cake','','4.50']]},
- {id:'wd',label:{en:'Hot Drinks',nl:'Warme Dranken',el:'Ζεστά Ροφήματα',ur:'گرم مشروبات'},items:[
-  ['Karak Chai','Indiase thee met volle melk, kardemom, kaneel en een vleugje suiker','4.50'],
-  ['Kashmiri Chai','Romige rose-thee met kardemom, saffraan, amandelen en pistache','4.75'],
-  ['Thee','Verse munt, gember, groen, zwart of sinaasappel-kaneel','3.75'],
-  ['Espresso','','3.10'],['Espresso Macchiato','','3.30'],['Americano','','3.45'],['Doppio','','3.90'],
-  ['Cappuccino','','3.95'],['Flat white','','4.45'],['Latte Macchiato','','4.45'],['Baby chino','','1.00'],
-  ['Warme chocomelk','','4.35'],['Haver / kokos / soja','optioneel','+0.40'],['Iced','optioneel','+0.50']]},
- {id:'kd',label:{en:'Cold Drinks',nl:'Koude Dranken',el:'Κρύα Ποτά',ur:'ٹھنڈے مشروبات'},items:[
-  ['Mango Lassi','Romige Pakistaanse yoghurtdrank met verse mango','5.00'],
-  ['Nimboo Juice','Versgeperst citroensap met Indiase zoutmix','5.00'],
-  ['Rode sap','Aardbei, biet, peer en appel','4.95'],
-  ['Groene sap','Komkommer, boerenkool, selderij, appel en gember','4.95'],
-  ['Oranje sap','Sinaasappel, appel en wortel','4.95'],
-  ['Ice tea','Sparkling, green of peach','3.60'],
-  ['Fritz','Cola, sinas, limo of super zero','3.95'],
-  ['Fritz rabarber','','4.50'],['Royal Club ginger ale','','3.60'],['Royal Club bitter lemon','','3.50'],
-  ['Lemon & gras','','4.95'],['Nix & Kix','Mango-ginger of watermeloen-hibiscus','4.95'],
-  ['Appelsap','','3.50'],['Indian tonic','','4.95'],['Kraanwater','','1.00'],
-  ['Lowlander 0.0% Wit','','5.30'],['Lowlander 0.0% Mango IPA','','5.30'],['Lowlander 0.0% Citrus Blonde','','5.75']]}
-];
-let mCat=MENU[0].id;
-const mtabs=document.getElementById('mtabs'),mlist=document.getElementById('menuItems');
-function renderMenu(){
-  const lang=document.documentElement.lang||'en';
-  mtabs.innerHTML=MENU.map(c=>`<button class="mtab${c.id===mCat?' on':''}" data-cat="${c.id}">${c.label[lang]||c.label.en}</button>`).join('');
-  mtabs.querySelectorAll('.mtab').forEach(b=>b.addEventListener('click',()=>{
-    if(b.dataset.cat===mCat)return;
-    mCat=b.dataset.cat;
-    mlist.classList.add('fade');
-    setTimeout(()=>{renderMenu();mlist.classList.remove('fade');
-      const act=mtabs.querySelector('.mtab.on');
-      if(act&&mtabs.scrollWidth>mtabs.clientWidth)mtabs.scrollTo({left:act.offsetLeft-mtabs.clientWidth/2+act.offsetWidth/2,behavior:'smooth'});
-    },220);
-  }));
-  const cat=MENU.find(c=>c.id===mCat);
-  mlist.innerHTML=cat.items.map(([n,d,p])=>`<div class="mi"><div><b>${n}</b>${d?`<small>${d}</small>`:''}</div><span class="dots"></span><span class="price">€${p}</span></div>`).join('');
-}
-renderMenu();
-
-// booking form → WhatsApp / e-mail
-const bTime=document.getElementById('bTime');
-for(let h=10;h<=20;h++){for(const m of ['00','30']){if(h===20&&m==='30')break;const t=String(h).padStart(2,'0')+':'+m;const o=document.createElement('option');o.textContent=t;bTime.appendChild(o)}}
-const bDate=document.getElementById('bDate');
-bDate.min=new Date().toISOString().split('T')[0];
-const WA_MSG={
-  en:(n,d,t,g)=>`Hi Desi & Dutch! I'd like to book a table for ${g} on ${d} at ${t}. Name: ${n}`,
-  nl:(n,d,t,g)=>`Hoi Desi & Dutch! Ik wil graag een tafel reserveren voor ${g} personen op ${d} om ${t}. Naam: ${n}`,
-  el:(n,d,t,g)=>`Γεια σας Desi & Dutch! Θα ήθελα να κλείσω τραπέζι για ${g} άτομα στις ${d} στις ${t}. Όνομα: ${n}`,
-  ur:(n,d,t,g)=>`السلام علیکم Desi & Dutch! میں ${d} کو ${t} بجے ${g} افراد کے لیے ٹیبل بک کرنا چاہتا/چاہتی ہوں۔ نام: ${n}`
-};
-function bookingData(){
-  const n=document.getElementById('bName'),d=bDate;
-  let ok=true;
-  [n,d].forEach(f=>{f.classList.toggle('err',!f.value);if(!f.value)ok=false});
-  if(!ok)return null;
-  return WA_MSG[document.documentElement.lang]?.(n.value,d.value,bTime.value,document.getElementById('bGuests').value)||WA_MSG.en(n.value,d.value,bTime.value,document.getElementById('bGuests').value);
-}
-document.getElementById('waBtn').addEventListener('click',()=>{const m=bookingData();if(m)window.open('https://wa.me/31618550258?text='+encodeURIComponent(m),'_blank')});
-document.getElementById('mailBtn').addEventListener('click',()=>{const m=bookingData();if(m)location.href='mailto:info@desi-dutch.nl?subject='+encodeURIComponent('Reservation')+'&body='+encodeURIComponent(m)});
-
-// mobile menu
-document.getElementById('burger').addEventListener('click',()=>document.body.classList.toggle('menu-open'));
-document.querySelectorAll('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
-
-// sliding pill nav (vanilla port of the framer-motion NavHeader)
-const nl=document.getElementById('navLinks'),pill=nl.querySelector('.pill');
-nl.querySelectorAll('a').forEach(a=>a.addEventListener('mouseenter',()=>{
-  pill.style.left=a.offsetLeft+'px';
-  pill.style.width=a.offsetWidth+'px';
-  pill.style.opacity=1;
-  nl.querySelectorAll('a').forEach(x=>x.classList.toggle('lit',x===a));
-}));
-nl.addEventListener('mouseleave',()=>{
-  pill.style.opacity=0;
-  nl.querySelectorAll('a').forEach(x=>x.classList.remove('lit'));
-});
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.15});
-document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-// highlight today's opening hours
-const d=new Date().getDay();// 0=sun
-const rows=document.querySelectorAll('.hours .hr');
-const map=[6,0,1,2,3,4,5];// sun->index6? rows start Monday
-rows[(d+6)%7].classList.add('today');
-</script>
-</body>
-</html>
+  ['Loem

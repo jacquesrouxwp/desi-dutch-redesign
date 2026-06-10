@@ -33,16 +33,17 @@ a{color:inherit;text-decoration:none}
 #intro.reveal{background:transparent;backdrop-filter:blur(0px) saturate(1);-webkit-backdrop-filter:blur(0px) saturate(1);pointer-events:none}
 #intro.reveal .skip{opacity:0}
 #intro.done{opacity:0;visibility:hidden}
-#introLogo{grid-area:1/1;justify-self:center;align-self:center;width:min(300px,52vw);opacity:0;transform:scale(.82);transition:opacity .8s ease,transform 1.05s cubic-bezier(.65,.05,.25,1);will-change:transform;filter:drop-shadow(0 16px 44px rgba(31,20,16,.5))}
-#introLogo.show{opacity:1;transform:scale(1)}
+#intro video{grid-area:1/1;width:min(440px,74vw);height:auto;transition:opacity .4s;filter:drop-shadow(0 18px 50px rgba(31,20,16,.45))}
+#introLogo{grid-area:1/1;justify-self:center;align-self:center;width:min(280px,48vw);opacity:0;transition:opacity .4s,transform 1s cubic-bezier(.65,.05,.25,1);will-change:transform;filter:drop-shadow(0 10px 30px rgba(31,20,16,.5))}
 #intro .skip{color:rgba(250,244,234,.75)}
 #intro .skip:hover{color:#f5c98f}
 #intro .skip{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b0a294;cursor:pointer;border:none;background:none;font-family:'Inter'}
 #intro .skip:hover{color:var(--saffron-deep)}
 
 /* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:calc(16px + env(safe-area-inset-top,0px)) 4vw 16px;transition:.4s}
+nav{position:fixed;top:env(safe-area-inset-top);left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 4vw;transition:.4s}
 nav.scrolled{background:rgba(250,244,234,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+nav.scrolled::before{content:'';position:absolute;top:calc(-1*env(safe-area-inset-top));left:0;right:0;height:env(safe-area-inset-top);background:inherit;z-index:-1}
 nav .logo img{height:56px;transition:.3s;filter:drop-shadow(0 2px 10px rgba(255,255,255,.45)) drop-shadow(0 1px 3px rgba(31,20,16,.3))}
 nav.scrolled .logo img{height:44px;filter:none}
 .nav-links{position:relative;display:flex;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--cream);border:1.5px solid rgba(250,244,234,.35);border-radius:999px;padding:4px;transition:border-color .4s}
@@ -80,7 +81,7 @@ body.menu-open .burger span:nth-child(2){opacity:0}
 body.menu-open .burger span:nth-child(3){top:21px;transform:rotate(-45deg)}
 
 /* mobile menu */
-#mobileMenu{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 10px) 9vw calc(env(safe-area-inset-bottom,0px) + 10px);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
+#mobileMenu{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:env(safe-area-inset-top) 9vw 0;opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
 body.menu-open #mobileMenu{opacity:1;visibility:visible}
 #mobileMenu a{font-family:'Fraunces';font-size:clamp(32px,9vw,44px);color:var(--cream);padding:12px 0;border-bottom:1px solid var(--line-l);opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s,color .3s}
 #mobileMenu a:active{color:var(--saffron)}
@@ -104,7 +105,7 @@ body.menu-open{overflow:hidden}
   nav>.btn{display:none}
   .lang{margin-left:auto;margin-right:8px}
   #stickyCta{display:block}
-  nav{padding:calc(10px + env(safe-area-inset-top,0px)) 5vw 10px}
+  nav{padding:12px 5vw}
   nav .logo img{height:46px}
   section{padding:64px 0}
   .wrap{padding:0 7vw}
@@ -195,22 +196,6 @@ section{padding:110px 0}
 .dish h3{font-size:21px}
 .dish .price{font-family:'Fraunces';font-size:19px;color:#f5c98f;white-space:nowrap}
 .dish p{font-size:13.5px;line-height:1.6;color:rgba(250,244,234,.6)}
-/* menu category tabs */
-.mtabs-wrap{position:relative;margin-bottom:34px}
-.mtabs{display:flex;gap:8px;flex-wrap:wrap}
-.mtab{flex:0 0 auto;border:1px solid var(--line-l);background:none;border-radius:999px;padding:11px 18px;cursor:pointer;font-family:'Inter';font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,244,234,.65);transition:.3s;white-space:nowrap}
-.mtab:hover{color:var(--cream);border-color:rgba(250,244,234,.4)}
-.mtab.on{background:var(--saffron);border-color:var(--saffron);color:#fff;box-shadow:0 6px 20px rgba(232,132,44,.35)}
-@media(max-width:760px){
-  .mtabs{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;margin:0 -7vw;padding:4px 7vw 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .mtabs::-webkit-scrollbar{display:none}
-  .mtab{scroll-snap-align:center;padding:13px 20px;font-size:13px}
-  .mtabs-wrap::after{content:'';position:absolute;top:0;right:-7vw;width:52px;height:calc(100% - 8px);background:linear-gradient(90deg,transparent,var(--ink));pointer-events:none}
-  .mtabs-wrap::before{content:'';position:absolute;top:0;left:-7vw;width:20px;height:calc(100% - 8px);background:linear-gradient(270deg,transparent,var(--ink));pointer-events:none;z-index:1}
-}
-.menu-list{transition:opacity .35s,transform .35s}
-.menu-list.fade{opacity:0;transform:translateY(12px)}
-.mnote{font-size:12.5px;color:rgba(250,244,234,.45);margin:-34px 0 50px}
 .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 56px;margin-bottom:50px}
 .mi{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:16px 4px;border-bottom:1px solid var(--line-l);transition:.25s}
 .mi:hover{padding-left:12px;border-bottom-color:var(--saffron)}
@@ -299,7 +284,9 @@ footer a:hover{color:var(--saffron)}
 <body>
 
 <div id="intro">
+  <video id="introVid" src="assets/logo-motion-alpha.webm" autoplay muted playsinline></video>
   <img id="introLogo" src="assets/logo.png" alt="">
+  <button class="skip" onclick="handoff()">Skip intro</button>
 </div>
 
 <nav id="nav">
@@ -403,9 +390,16 @@ footer a:hover{color:var(--saffron)}
         </div>
       </article>
     </div>
-    <div class="mtabs-wrap"><div class="mtabs" id="mtabs"></div></div>
-    <div class="menu-list" id="menuItems"></div>
-    <p class="mnote">* Vega(n) optie beschikbaar · Alles 100% halal</p>
+    <div class="menu-list rv">
+      <div class="mi"><div><b>Chicken Curry</b><small data-i18n="li1">Creamy, richly spiced tomato sauce — a true favourite</small></div><span class="dots"></span><span class="price">€17.95</span></div>
+      <div class="mi"><div><b>Keema Aloo Mattar</b><small data-i18n="li2">Hearty minced-meat curry with potato & green peas</small></div><span class="dots"></span><span class="price">€18.95</span></div>
+      <div class="mi"><div><b>Aloo Mattar</b><small data-i18n="li3">Soft potatoes & fresh peas in aromatic tomato sauce</small></div><span class="dots"></span><span class="price">€12.95</span></div>
+      <div class="mi"><div><b>Special Chicken Biryani</b><small data-i18n="li4">Fragrant basmati, saffron, oven-roasted chicken & raita</small></div><span class="dots"></span><span class="price">€19.95</span></div>
+      <div class="mi"><div><b>Turkse Eitjes</b><small data-i18n="li5">Poached eggs, garlic-dill yoghurt, chili butter</small></div><span class="dots"></span><span class="price">€13.50</span></div>
+      <div class="mi"><div><b>Smoothie Bowl</b><small data-i18n="li6">Tropical fruit, Greek yoghurt, granola & walnuts</small></div><span class="dots"></span><span class="price">€11.50</span></div>
+      <div class="mi"><div><b>Uitsmijter</b><small data-i18n="li7">Two fried eggs on sourdough with cheese & ham</small></div><span class="dots"></span><span class="price">€13.95</span></div>
+      <div class="mi"><div><b>Masala Chai</b><small data-i18n="li8">Brewed the traditional way, with pistachio rusk</small></div><span class="dots"></span><span class="price">€4.50</span></div>
+    </div>
     <div class="badges rv">
       <span class="badge hl">100% Halal</span>
       <span class="badge" data-i18n="badge_veg">Vegetarian options</span>
@@ -528,26 +522,33 @@ footer a:hover{color:var(--saffron)}
 </footer>
 
 <script>
-// intro: logo appears center, then flies into the nav corner
+// intro logo motion → flies into nav corner
 const intro=document.getElementById('intro');
+const iv=document.getElementById('introVid');
 const il=document.getElementById('introLogo');
 const navLogo=document.querySelector('nav .logo img');
 navLogo.style.opacity=0; // hidden until handoff
 let handed=false;
+// Safari can't play VP9 alpha — skip the spin, just show the site
+if(!iv.canPlayType('video/webm; codecs="vp9"')){iv.style.display='none';setTimeout(()=>handoff(),50)}
 function handoff(){
   if(handed)return;handed=true;
-  // blur lifts, logo flies to the nav corner
-  intro.classList.add('reveal');
-  const s=il.getBoundingClientRect(),e=navLogo.getBoundingClientRect();
-  const dx=(e.left+e.width/2)-(s.left+s.width/2);
-  const dy=(e.top+e.height/2)-(s.top+s.height/2);
-  il.style.transform=`translate(${dx}px,${dy}px) scale(${e.height/s.height})`;
-  setTimeout(()=>{navLogo.style.opacity=1;intro.classList.add('done');setTimeout(()=>intro.remove(),900)},1050);
+  // 1. crossfade video → transparent png
+  il.style.opacity=1;iv.style.opacity=0;
+  setTimeout(()=>{
+    // 2. blur lifts, logo flies to the nav corner
+    intro.classList.add('reveal');
+    const s=il.getBoundingClientRect(),e=navLogo.getBoundingClientRect();
+    const dx=(e.left+e.width/2)-(s.left+s.width/2);
+    const dy=(e.top+e.height/2)-(s.top+s.height/2);
+    il.style.transform=`translate(${dx}px,${dy}px) scale(${e.height/s.height})`;
+    // 3. swap to the real nav logo
+    setTimeout(()=>{navLogo.style.opacity=1;intro.classList.add('done');setTimeout(()=>intro.remove(),900)},1000);
+  },420);
 }
-requestAnimationFrame(()=>requestAnimationFrame(()=>il.classList.add('show')));
-il.addEventListener('error',handoff);
-setTimeout(handoff,2100);
-intro.addEventListener('click',handoff); // tap to skip
+iv.addEventListener('ended',handoff);
+iv.addEventListener('error',handoff);
+setTimeout(handoff,6500); // failsafe
 
 const nav=document.getElementById('nav');
 const sticky=document.getElementById('stickyCta');
@@ -692,92 +693,10 @@ function setLang(l){
   const D=DICTS[l];
   tEls.forEach(e=>{const k=e.dataset.i18n;e.innerHTML=(D&&D[k])?D[k]:e.__en});
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
-  try{renderMenu()}catch(err){}
   try{localStorage.setItem('dd-lang',l)}catch(err){}
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
 try{const sv=localStorage.getItem('dd-lang');if(sv&&sv!=='en')setLang(sv)}catch(err){}
-
-// full menu with clickable categories (from desi-dutch.nl/Menu)
-const MENU=[
- {id:'do',label:{en:'Dutch Breakfast',nl:'Dutch Ontbijt',el:'Ολλανδικό Πρωινό',ur:'ڈچ ناشتہ'},items:[
-  ['Smoothiebowl','Tropisch fruit, Griekse yoghurt, passievrucht-granola, notenmix en walnoten','11.50'],
-  ['Uitsmijter','2 gebakken eieren op zuurdesembrood met kaas en ham*','13.95'],
-  ['Pannenkoeken','Keus uit appel-kaneel, kaas of Nutella','12.50'],
-  ['Wentelteefjes','Goudbruin gebakken brood met melk, ei en een vleugje kaneel','12.95'],
-  ['Turkse eitjes','Gepocheerde eieren, knoflook-dille yoghurt, chiliboter, komkommersalade, zuurdesembrood','14.95']]},
- {id:'dl',label:{en:'Dutch Lunch',nl:'Dutch Lunch',el:'Ολλανδικό Μεσημεριανό',ur:'ڈچ لنچ'},items:[
-  ['Broodje gezond','Zuurdesembrood met ham, kaas, sla, tomaat, komkommer en avocado*','12.95'],
-  ['Sandwich','Mango-glazed halloumi, tahini-doperwtenspread, rode ui, avocado, hot honey','13.95'],
-  ['Dhal soep','Romige linzensoep met aardappel, wortel en kruidige specerijen','11.95'],
-  ['Sesam soja aubergine','Zongedroogde tomaten, gegrilde paprika, hummus en za’atar op flatbread','12.95'],
-  ['Tosti uit de pan','Kaas, walnoot, rucola en huisgemaakte ketchup','9.95'],
-  ['Broodje tonijnsalade','Verse tonijn, ui, appel, komijn, verse chili en mayonaise','12.95']]},
- {id:'dso',label:{en:'Desi Breakfast',nl:'Desi Ontbijt',el:'Desi Πρωινό',ur:'دیسی ناشتہ'},items:[
-  ['Cheese paratha','Goudbruin gebakken paratha gevuld met gesmolten kaas, met chutney','11.95'],
-  ['Anda Paratha','Knapperige paratha met gekruid roerei, koriander, ui, tomaat en kurkuma','11.95'],
-  ['Chana Halwa & Paratha','Zoete griesmeel met kardemom en rozijnen, warme paratha en chana masala','13.95'],
-  ['Desi Omelet','Luchtige omelet met tomaat, groene chili en verse koriander','11.95']]},
- {id:'dsl',label:{en:'Desi Lunch',nl:'Desi Lunch',el:'Desi Μεσημεριανό',ur:'دیسی لنچ'},items:[
-  ['Aloo Paratha (mild)','Zacht paratha met licht gekruide aardappelpuree, raita en milde chutney','11.95'],
-  ['Chicken tikka paratha','Volkoren paratha met malse kip in tikka masala','13.95'],
-  ['Chana Chaat','Kruidige kikkererwtensalade met tamarinde, granaatappel en chaat masala','12.95']]},
- {id:'dv',label:{en:'Desi Dinner · Veggie',nl:'Desi Diner Vegetarisch',el:'Desi Δείπνο · Χορτοφαγικό',ur:'دیسی ڈنر · سبزی'},items:[
-  ['Saag Paneer','Romige spinaziecurry met huisgemaakte paneer','15.95'],
-  ['Chana Masala curry','Kikkererwten in milde tomatensaus met Indiase kruiden en koriander','14.95'],
-  ['Aloo Mattar','Curry van aardappel en doperwten in mild gekruide tomatensaus','12.95']]},
- {id:'dm',label:{en:'Desi Dinner · Meat',nl:'Desi Diner Vlees',el:'Desi Δείπνο · Κρέας',ur:'دیسی ڈنر · گوشت'},items:[
-  ['Special chicken biryani','Basmati, kippenbouten uit de oven, kardemom, kaneel, saffraan. Met raita','19.95'],
-  ['Chicken curry','Zachte kip in romige, rijk gekruide tomatensaus','17.95'],
-  ['Keema Aloo Mattar','Gehaktcurry met aardappel en doperwten in aromatische tomatensaus','18.95'],
-  ['Chicken Biryani','Geurige basmati met kip en authentieke specerijen. Met raita','17.95']]},
- {id:'sn',label:{en:'Desi Snacks',nl:'Desi Snacks',el:'Desi Σνακ',ur:'دیسی سنیکس'},items:[
-  ['Vegetarische Samosa (mild)','Knapperig, gevuld met gekruide aardappel en doperwten','3.95'],
-  ['Pakora (mild)','Knapperige groentebeignets in kikkererwtenbeslag','6.95'],
-  ['Loempia','Goudbruin, gevuld met verse groenten en sojavlees','3.95'],
-  ['Chicken Tandoori wings','Zacht gemarineerd, langzaam geroosterd, milde pittige saus','6.95']]},
- {id:'ds',label:{en:'Dessert',nl:'Dessert',el:'Επιδόρπια',ur:'میٹھا'},items:[
-  ['Kheer','Pakistaanse rijstpudding met kardemom en pistache','6.95'],
-  ['Zarda rice','Zoete saffraanrijst met kardemom, rozijnen en geroosterde noten','8.95'],
-  ['Worteltaart','','4.50'],['Appelkruimeltaart','','4.50'],['Bananenbrood','','4.50'],['Vegan chocolate cake','','4.50']]},
- {id:'wd',label:{en:'Hot Drinks',nl:'Warme Dranken',el:'Ζεστά Ροφήματα',ur:'گرم مشروبات'},items:[
-  ['Karak Chai','Indiase thee met volle melk, kardemom, kaneel en een vleugje suiker','4.50'],
-  ['Kashmiri Chai','Romige rose-thee met kardemom, saffraan, amandelen en pistache','4.75'],
-  ['Thee','Verse munt, gember, groen, zwart of sinaasappel-kaneel','3.75'],
-  ['Espresso','','3.10'],['Espresso Macchiato','','3.30'],['Americano','','3.45'],['Doppio','','3.90'],
-  ['Cappuccino','','3.95'],['Flat white','','4.45'],['Latte Macchiato','','4.45'],['Baby chino','','1.00'],
-  ['Warme chocomelk','','4.35'],['Haver / kokos / soja','optioneel','+0.40'],['Iced','optioneel','+0.50']]},
- {id:'kd',label:{en:'Cold Drinks',nl:'Koude Dranken',el:'Κρύα Ποτά',ur:'ٹھنڈے مشروبات'},items:[
-  ['Mango Lassi','Romige Pakistaanse yoghurtdrank met verse mango','5.00'],
-  ['Nimboo Juice','Versgeperst citroensap met Indiase zoutmix','5.00'],
-  ['Rode sap','Aardbei, biet, peer en appel','4.95'],
-  ['Groene sap','Komkommer, boerenkool, selderij, appel en gember','4.95'],
-  ['Oranje sap','Sinaasappel, appel en wortel','4.95'],
-  ['Ice tea','Sparkling, green of peach','3.60'],
-  ['Fritz','Cola, sinas, limo of super zero','3.95'],
-  ['Fritz rabarber','','4.50'],['Royal Club ginger ale','','3.60'],['Royal Club bitter lemon','','3.50'],
-  ['Lemon & gras','','4.95'],['Nix & Kix','Mango-ginger of watermeloen-hibiscus','4.95'],
-  ['Appelsap','','3.50'],['Indian tonic','','4.95'],['Kraanwater','','1.00'],
-  ['Lowlander 0.0% Wit','','5.30'],['Lowlander 0.0% Mango IPA','','5.30'],['Lowlander 0.0% Citrus Blonde','','5.75']]}
-];
-let mCat=MENU[0].id;
-const mtabs=document.getElementById('mtabs'),mlist=document.getElementById('menuItems');
-function renderMenu(){
-  const lang=document.documentElement.lang||'en';
-  mtabs.innerHTML=MENU.map(c=>`<button class="mtab${c.id===mCat?' on':''}" data-cat="${c.id}">${c.label[lang]||c.label.en}</button>`).join('');
-  mtabs.querySelectorAll('.mtab').forEach(b=>b.addEventListener('click',()=>{
-    if(b.dataset.cat===mCat)return;
-    mCat=b.dataset.cat;
-    mlist.classList.add('fade');
-    setTimeout(()=>{renderMenu();mlist.classList.remove('fade');
-      const act=mtabs.querySelector('.mtab.on');
-      if(act&&mtabs.scrollWidth>mtabs.clientWidth)mtabs.scrollTo({left:act.offsetLeft-mtabs.clientWidth/2+act.offsetWidth/2,behavior:'smooth'});
-    },220);
-  }));
-  const cat=MENU.find(c=>c.id===mCat);
-  mlist.innerHTML=cat.items.map(([n,d,p])=>`<div class="mi"><div><b>${n}</b>${d?`<small>${d}</small>`:''}</div><span class="dots"></span><span class="price">€${p}</span></div>`).join('');
-}
-renderMenu();
 
 // booking form → WhatsApp / e-mail
 const bTime=document.getElementById('bTime');
