@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desi &amp; Dutch — Design Prototypes | Utrecht</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Fraunces:wght@600&amp;display=swap');
+    :root { --cream:#faf4ea; --ink:#1f1410; --saffron:#e8842c; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--cream); color: var(--ink); line-height: 1.5; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 40px 6vw; }
+    header { text-align: center; padding: 60px 0 40px; }
+    h1 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(42px, 7vw, 72px); line-height: 0.95; margin-bottom: 12px; }
+    .tag { display: inline-block; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; background: #fff; border: 1px solid rgba(31,20,16,.1); padding: 4px 14px; border-radius: 999px; }
+    .lead { font-size: 18px; max-width: 520px; margin: 16px auto 0; color: #4a3a30; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 40px 0; }
+    .card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(31,20,16,.08); transition: transform .2s, box-shadow .2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(31,20,16,.12); }
+    .card .preview { height: 180px; background: linear-gradient(135deg, #f3e9d8, #e8d9c2); display: flex; align-items: center; justify-content: center; font-size: 13px; letter-spacing: .08em; color: #6b5749; border-bottom: 1px solid #f0e6d8; }
+    .card .preview.gym { background: linear-gradient(135deg, #161616, #0f0f0f); color: #d8ff3e; }
+    .card-body { padding: 24px; }
+    .card h3 { font-size: 21px; margin-bottom: 8px; }
+    .card p { font-size: 14px; color: #5c4a3d; margin-bottom: 18px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--saffron); color: #fff; font-weight: 600; font-size: 14px; padding: 12px 22px; border-radius: 999px; text-decoration: none; transition: .2s; }
+    .btn:hover { background: #c75d1a; }
+    .btn.outline { background: transparent; color: var(--ink); border: 1px solid rgba(31,20,16,.2); }
+    .btn.outline:hover { background: rgba(31,20,16,.04); }
+    .meta { margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(31,20,16,.08); font-size: 13px; color: #7a6655; display: flex; gap: 16px; flex-wrap: wrap; }
+    .assets { font-size: 13px; }
+    footer { text-align: center; padding: 40px 0 20px; font-size: 12px; opacity: .6; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="tag">Utrecht • Design Prototypes</div>
+      <h1>Desi &amp; Dutch</h1>
+      <p class="lead">Pakistani soul, Dutch comfort.<br>Two high-fidelity static redesign concepts and the complete asset set.</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="preview">Desi &amp; Dutch — Restaurant / Café</div>
+        <div class="card-body">
+          <h3>Desi Dutch Redesign</h3>
+          <p>Elegant cream &amp; saffron experience. Animated logo intro, bilingual (EN/اردو), menu, gallery, booking. Uses the full motion assets.</p>
+          <a class="btn" href="desi-dutch-redesign.html">Open prototype →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="preview gym">Dutch Gym — 24/7 Fitness</div>
+        <div class="card-body">
+          <h3>Dutch Gym Redesign</h3>
+          <p>Dark modern fitness concept. Strong typography, volt green accents, membership, classes and facilities sections.</p>
+          <a class="btn" href="dutchgym-redesign.html">Open prototype →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="assets">
+      <strong>Assets included:</strong> logo.png, logo-motion.mp4 + alpha.webm, food photography (samosas, aloo-paratha, chana-masala, chai, paratha-wrap) + reference images.
+    </div>
+
+    <div class="meta">
+      <div>Self-contained HTML — open directly in browser</div>
+      <div><a href="https://github.com/jacquesrouxwp/desi-dutch-redesign" style="color:inherit">View source on GitHub</a></div>
+    </div>
+
+    <footer>
+      Exported from local design session • All assets local-relative
+    </footer>
+  </div>
+</body>
+</html>
