@@ -327,20 +327,11 @@ footer a:hover{color:var(--saffron)}
 <body>
 
 <div id="intro">
-  <!-- LOGO TEMPORARILY REMOVED per user request.
-       Waiting for new transparent logo.
-       The new logo MUST use the exact same animation:
-       appears centered in intro overlay, then flies to top-left nav corner.
-       Keep this <img id="introLogo"> structure exactly. -->
-  <img id="introLogo" alt="">
+  <img id="introLogo" src="assets/logo.png" alt="">
 </div>
 
 <nav id="nav">
-  <a class="logo" href="#top">
-  <!-- LOGO TEMPORARILY REMOVED - new one coming from user.
-       The nav logo must keep the same .logo class and img for scroll sizing + handoff animation. -->
-  <img alt="Desi & Dutch" onerror="this.outerHTML='<b class=serif style=font-size:22px>Desi & Dutch</b>'">
-</a>
+  <a class="logo" href="#top"><img src="assets/logo.png" alt="Desi & Dutch" onerror="this.outerHTML='<b class=serif style=font-size:22px>Desi & Dutch</b>'"></a>
   <div class="nav-links" id="navLinks">
     <a href="#story" data-i18n="nav_story">Our story</a>
     <a href="#menu" data-i18n="nav_menu">Menu</a>
@@ -551,9 +542,7 @@ footer a:hover{color:var(--saffron)}
 <footer>
   <div class="foot-grid">
     <div class="fc">
-      <!-- LOGO TEMPORARILY REMOVED - waiting for new transparent version from user.
-           Footer logo uses same asset path for consistency. -->
-      <img alt="Desi & Dutch" style="height:64px">
+      <img src="assets/logo.png" alt="Desi & Dutch" style="height:64px">
       <p class="brand-desc" data-i18n="foot_desc">A unique halal restaurant & café in the heart of Utrecht, where the rich flavors of Pakistan and India meet the cosy warmth of a Dutch café.</p>
       <div class="socials">
         <a href="https://wa.me/31618550258" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></a>
