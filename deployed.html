@@ -23,7 +23,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 h1,h2,h3,.serif{font-family:'Fraunces',serif}
-img{display:block;max-width:100%}
+img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--saffron);color:#fff}
 .wrap{max-width:1200px;margin:0 auto;padding:0 6vw}
@@ -124,9 +124,15 @@ body.menu-open{overflow:hidden}
 /* hero */
 header{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--cream);overflow:hidden}
 .hero-bg{position:absolute;inset:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:slowZoom 9s ease-out forwards}
+.hero-bg .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.1s ease;animation:slowZoom 11s ease-out forwards}
+.hero-bg .hero-slide.active{opacity:1}
 @keyframes slowZoom{to{transform:scale(1)}}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,20,16,.45),rgba(31,20,16,.25) 40%,rgba(31,20,16,.82))}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,20,16,.45),rgba(31,20,16,.25) 40%,rgba(31,20,16,.82));z-index:1}
+
+/* hero photo carousel dots */
+.hero-dots{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:5}
+.hero-dots span{width:6px;height:6px;border-radius:999px;background:rgba(250,244,234,.55);transition:all .3s}
+.hero-dots span.active{background:#f5c98f;width:18px;border-radius:3px}
 .hero-content{position:relative;z-index:1;padding:0 6vw 9vh;max-width:980px}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;margin-bottom:20px;color:#f5c98f;opacity:0;animation:fadeUp .9s .2s forwards}
 .hero-eyebrow::before{content:"";width:36px;height:1px;background:#f5c98f}
@@ -167,8 +173,8 @@ section{padding:110px 0}
 .story{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .story-imgs{position:relative;height:560px}
 .story-imgs .im{position:absolute;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px rgba(31,20,16,.25)}
-.story-imgs .im img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
-.story-imgs .im:hover img{transform:scale(1.06)}
+.story-imgs .im img,.story-imgs .im video{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.story-imgs .im:hover img,.story-imgs .im video{transform:scale(1.06)}
 .story-imgs .im1{width:68%;height:75%;top:0;left:0;z-index:1}
 .story-imgs .im2{width:52%;height:55%;bottom:0;right:0;z-index:2;border:6px solid var(--cream)}
 .story-imgs .stamp{position:absolute;top:-26px;right:8%;z-index:3;width:110px;height:110px;border-radius:50%;background:var(--saffron);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;line-height:1.5;animation:spinSlow 18s linear infinite;padding:14px}
@@ -189,13 +195,35 @@ section{padding:110px 0}
 .dish{border-radius:18px;overflow:hidden;background:var(--ink2);border:1px solid var(--line-l);transition:.35s}
 .dish:hover{transform:translateY(-7px);border-color:rgba(232,132,44,.55)}
 .dish .ph{aspect-ratio:4/3;overflow:hidden}
-.dish .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
-.dish:hover .ph img{transform:scale(1.07)}
+.dish .ph img,.dish .ph video{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.dish:hover .ph img,.dish:hover .ph video{transform:scale(1.07)}
 .dish .body{padding:22px}
 .dish .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:8px}
 .dish h3{font-size:21px}
 .dish .price{font-family:'Fraunces';font-size:19px;color:#f5c98f;white-space:nowrap}
 .dish p{font-size:13.5px;line-height:1.6;color:rgba(250,244,234,.6)}
+
+/* click photo to play video (food photos stay as stills until tapped/clicked) */
+.media-reveal{cursor:pointer}
+.media-reveal .play-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(31,20,16,.28);z-index:2;pointer-events:none;transition:background .2s,opacity .2s;
+}
+.media-reveal .play-overlay::after{
+  content:"▶";display:block;width:46px;height:46px;line-height:46px;text-align:center;
+  font-size:19px;color:#fff;background:rgba(232,132,44,.9);border-radius:50%;
+  box-shadow:0 4px 16px rgba(0,0,0,.35);
+}
+.media-reveal:hover .play-overlay{background:rgba(31,20,16,.15)}
+.media-reveal:hover .play-overlay::after{background:var(--saffron)}
+.media-reveal .revert-btn{
+  position:absolute;top:10px;right:10px;z-index:10;width:28px;height:28px;border:none;border-radius:50%;
+  background:rgba(250,244,234,.92);color:#1f1410;font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.media-reveal .revert-btn:hover{background:#fff}
+.story-imgs .im.media-reveal,.dish .ph.media-reveal{position:relative}
+
 .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 56px;margin-bottom:50px}
 .mi{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:16px 4px;border-bottom:1px solid var(--line-l);transition:.25s}
 .mi:hover{padding-left:12px;border-bottom-color:var(--saffron)}
@@ -315,7 +343,19 @@ footer a:hover{color:var(--saffron)}
 
 <header id="top">
   <div class="hero-bg">
-    <img src="assets/chai.jpg" alt="Masala chai at Desi & Dutch">
+    <!-- Photo carousel: cycles through beautiful food shots -->
+    <img class="hero-slide active" src="assets/chai.jpg" alt="Masala chai at Desi & Dutch">
+    <img class="hero-slide" src="assets/samosas.jpg" alt="Crispy samosas at Desi & Dutch">
+    <img class="hero-slide" src="assets/aloo-paratha.jpg" alt="Aloo paratha at Desi & Dutch">
+    <img class="hero-slide" src="assets/chana-masala.webp" alt="Chana masala at Desi & Dutch">
+    <img class="hero-slide" src="assets/new-food-n.jpg" alt="Signature dish at Desi & Dutch">
+    <div class="hero-dots" aria-hidden="true">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow" data-i18n="hero_eyebrow">Halal restaurant & café — Utrecht</div>
@@ -351,7 +391,10 @@ footer a:hover{color:var(--saffron)}
       </div>
     </div>
     <div class="story-imgs rv d1">
-      <div class="im im1"><img src="assets/paratha-wrap.jpg" alt="Chicken paratha wrap"></div>
+      <div class="im im1 media-reveal" data-video="assets/paratha.mp4">
+        <img src="assets/paratha-wrap.jpg" alt="Chicken paratha wrap">
+        <div class="play-overlay" aria-hidden="true"></div>
+      </div>
       <div class="im im2"><img src="assets/coffee-appeltaart.jpg" alt="Coffee and apple pie" onerror="this.src='assets/chai.jpg'"></div>
       <div class="stamp">100% halal · fresh daily ·</div>
     </div>
@@ -369,21 +412,30 @@ footer a:hover{color:var(--saffron)}
     </div>
     <div class="menu-grid">
       <article class="dish rv">
-        <div class="ph"><img src="assets/aloo-paratha.jpg" alt="Aloo Paratha"></div>
+        <div class="ph media-reveal" data-video="assets/paratha.mp4">
+          <img src="assets/aloo-paratha.jpg" alt="Aloo Paratha">
+          <div class="play-overlay" aria-hidden="true"></div>
+        </div>
         <div class="body">
           <div class="row"><h3>Aloo Paratha</h3><span class="price">€9.95</span></div>
           <p data-i18n="dish1">Golden stuffed flatbread from the tawa, with cooling yoghurt and fresh green chutney.</p>
         </div>
       </article>
       <article class="dish rv d1">
-        <div class="ph"><img src="assets/chana-masala.webp" alt="Chana Masala"></div>
+        <div class="ph media-reveal" data-video="assets/masala.mp4">
+          <img src="assets/chana-masala.webp" alt="Chana Masala">
+          <div class="play-overlay" aria-hidden="true"></div>
+        </div>
         <div class="body">
           <div class="row"><h3>Chana Masala</h3><span class="price">€14.95</span></div>
           <p data-i18n="dish2">Chickpeas simmered in a mild tomato sauce with soft Indian spices and fresh coriander.</p>
         </div>
       </article>
       <article class="dish rv d2">
-        <div class="ph"><img src="assets/samosas.jpg" alt="Samosas"></div>
+        <div class="ph media-reveal" data-video="assets/samosas.mp4">
+          <img src="assets/samosas.jpg" alt="Samosas">
+          <div class="play-overlay" aria-hidden="true"></div>
+        </div>
         <div class="body">
           <div class="row"><h3 data-i18n="dish3_name">Crispy Samosas</h3><span class="price">€6.50</span></div>
           <p data-i18n="dish3">Golden, hand-folded and fried to order — with fresh mint-yoghurt chutney.</p>
@@ -742,6 +794,112 @@ const d=new Date().getDay();// 0=sun
 const rows=document.querySelectorAll('.hours .hr');
 const map=[6,0,1,2,3,4,5];// sun->index6? rows start Monday
 rows[(d+6)%7].classList.add('today');
+
+// Photo stays visible by default. Click/tap the food photo (story or signature dishes) to reveal & play the matching video.
+// Video is looped, muted, no sound. Click video to pause/resume. Use the small ✕ button to go back to the photo.
+// This keeps initial load light + beautiful still photography, while giving the "beautiful videos" on demand.
+function initMediaReveal(){
+  document.querySelectorAll('.media-reveal').forEach(function(container){
+    var img = container.querySelector('img');
+    var overlay = container.querySelector('.play-overlay');
+    if(!img || !overlay) return;
+    var videoSrc = container.getAttribute('data-video');
+    if(!videoSrc) return;
+
+    container.addEventListener('click', function(ev){
+      // If video already present — toggle pause/play
+      var vid = container.querySelector('video');
+      if(vid){
+        if(vid.paused){ vid.play(); } else { vid.pause(); }
+        return;
+      }
+      // Switch to video
+      img.style.display = 'none';
+      overlay.style.display = 'none';
+      container.style.position = 'relative';
+
+      vid = document.createElement('video');
+      vid.autoplay = true;
+      vid.loop = true;
+      vid.muted = true;
+      vid.playsInline = true;
+      vid.style.width = '100%';
+      vid.style.height = '100%';
+      vid.style.objectFit = 'cover';
+      vid.poster = img.src;
+
+      var src = document.createElement('source');
+      src.src = videoSrc;
+      src.type = 'video/mp4';
+      vid.appendChild(src);
+
+      var closeBtn = document.createElement('button');
+      closeBtn.className = 'revert-btn';
+      closeBtn.textContent = '✕';
+      closeBtn.setAttribute('aria-label', 'Show photo');
+
+      closeBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        vid.pause();
+        vid.remove();
+        closeBtn.remove();
+        img.style.display = '';
+        overlay.style.display = '';
+      });
+
+      container.appendChild(vid);
+      container.appendChild(closeBtn);
+
+      // Tap/click on the playing video = pause/resume
+      vid.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(vid.paused) vid.play(); else vid.pause();
+      });
+    });
+  });
+}
+initMediaReveal();
+
+// Hero main banner photo carousel (auto-cycles beautiful food photos)
+// Restored / added the changing photos you remembered on the main banner.
+function initHeroCarousel(){
+  const slides = document.querySelectorAll('.hero-bg .hero-slide');
+  const dots = document.querySelectorAll('.hero-dots span');
+  if(slides.length <= 1) return;
+
+  let idx = 0;
+  function goTo(i){
+    slides[idx].classList.remove('active');
+    dots[idx] && dots[idx].classList.remove('active');
+    idx = (i + slides.length) % slides.length;
+    slides[idx].classList.add('active');
+    dots[idx] && dots[idx].classList.add('active');
+  }
+
+  // Auto-advance every ~6 seconds
+  let timer = setInterval(()=> goTo(idx + 1), 6200);
+
+  // Pause carousel when user hovers the hero area (nice for reading)
+  const heroHeader = document.querySelector('header#top');
+  if(heroHeader){
+    heroHeader.addEventListener('mouseenter', ()=> clearInterval(timer));
+    heroHeader.addEventListener('mouseleave', ()=>{
+      timer = setInterval(()=> goTo(idx + 1), 6200);
+    });
+  }
+
+  // Click dots to jump to specific photo
+  dots.forEach((dot, i)=>{
+    dot.style.cursor = 'pointer';
+    dot.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      clearInterval(timer);
+      goTo(i);
+      timer = setInterval(()=> goTo(idx + 1), 6200);
+    });
+  });
+}
+initHeroCarousel();
 </script>
 </body>
 </html>

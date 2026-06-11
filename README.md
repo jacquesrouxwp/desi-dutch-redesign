@@ -20,7 +20,7 @@ This repository contains high-fidelity static prototypes and brand assets from a
 
 ## Assets (`assets/`)
 
-Food photography, primary logo (PNG), motion logo videos for hero/intro, and supporting imagery.
+Food photography + beautiful looping food videos (masala.mp4, paratha.mp4, samosas.mp4 replacing signature dish & hero visuals), primary logo (PNG), motion logo videos for hero/intro, and supporting imagery.
 
 Additional reference images at root (`f*.jpg`, `t*.jpg`, `check50.png`).
 
